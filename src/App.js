@@ -1,6 +1,7 @@
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Title from './component/title';
+import Model from './component/model';
 
 function App() {
   let [showEvent, setEvent] = useState(true);
@@ -10,7 +11,6 @@ function App() {
     {title: "studying at bachelor", id: 3},
     {title: "in Itahari Namuna College", id: 4},
   ])
-  console.log(showEvent);
 
   const handleDelete = (id) => {
     setOutputFromArray((prevEvents)=>{
@@ -45,12 +45,22 @@ function App() {
 
       <div className='displayArray'>
         {showEvent && outputFromArray.map((event, index) => (
-          <div key={event.id}>
+          <React.Fragment key={event.id}>
             <h1>{event.title}</h1> 
             <button onClick={ () => handleDelete(event.id) }> Delete </button>
-          </div>
+          </React.Fragment>
         ))}
       </div>
+
+      {/* html tempelate cannot be assed in prop's so we use function extractor with html starting and ending tags */}
+      {/* <Model/>  {* when we want to only one component *} */}
+
+      <Model>
+        <div className="modal">
+            <h2> 10% Off Coupon Discount!!! </h2>
+            <p> Use Ab1jeet_Is_Don at checkout  </p>
+        </div>
+      </Model>
     </div>
 
   );
